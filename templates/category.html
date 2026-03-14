@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ category_name }} | InboxIQ</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+    <script defer src="{{ url_for('static', filename='chat.js') }}"></script>
 </head>
 <body>
     <div class="shell">
         <aside class="sidebar">
-            <a class="back-link" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+            <a class="back-link" href="{{ url_for('dashboard') }}">← Dashboard</a>
 
             <div class="brand-card small-brand">
                 <div class="brand-icon">{{ category_meta.icon }}</div>
@@ -20,113 +21,105 @@
                 </div>
             </div>
 
-            <div class="sidebar-block">
-                <h3>Other Labels</h3>
-                <div class="mini-nav">
-                    {% for category, meta in category_meta_all.items() %}
-                    <a href="{{ url_for('category_page', category_name=category) }}" class="mini-nav-link {% if category == category_name %}active{% endif %}">
-                        <span>{{ meta.icon }}</span>
-                        <span>{{ category }}</span>
-                    </a>
-                    {% endfor %}
-                </div>
-            </div>
+            <p class="smart-labels-title">Other Labels</p>
+            <nav class="label-list">
+                {% for category, meta in category_meta_all.items() %}
+                <a href="{{ url_for('category_page', category_name=category) }}" class="label-item {% if category == category_name %}active{% endif %}">
+                    <span class="label-left">
+                        <span class="label-icon">{{ meta.icon }}</span>
+                        <span class="label-name">{{ category }}</span>
+                    </span>
+                </a>
+                {% endfor %}
+            </nav>
         </aside>
 
-        <main class="main">
+        <main class="main" style="padding-bottom: 120px;">
             <section class="hero-card compact-hero">
                 <span class="eyebrow">Category View</span>
-                <h2>{{ category_name }} Emails</h2>
-                <p>
-                    Click an email to open the original message. Use the synthesis bar below to ask questions about this entire category.
-                </p>
+                <h2>{{ category_name }} Inbox</h2>
+                <p>{{ emails|length }} email{% if emails|length != 1 %}s{% endif %} sorted by priority. Click any to open the full message.</p>
             </section>
 
-            <section class="two-column-layout">
-                <div class="left-panel">
-                    <div class="section-header">
-                        <h3>Emails in {{ category_name }}</h3>
-                        <p>Sender, subject, and AI-generated summary.</p>
-                    </div>
+            <div class="section-header">
+                <h3>Emails</h3>
+                <p>Sorted by priority. Click to open the full message.</p>
+            </div>
 
-                    <div class="email-list">
-                        {% for email in emails %}
-                        <a href="{{ url_for('email_detail', email_id=email.id) }}" class="email-card">
-                            <div class="email-card-top">
-                                <div>
-                                    <div class="sender">{{ email.sender }}</div>
-                                    <div class="sender-email">{{ email.sender_email }}</div>
-                                </div>
-                                <div class="priority-chip priority-{{ 'high' if email.priority >= 7 else 'mid' if email.priority >= 4 else 'low' }}">
-                                    Priority {{ email.priority }}
-                                </div>
-                            </div>
-
-                            <div class="subject">{{ email.subject }}</div>
-                            <div class="summary">{{ email.summary }}</div>
-
-                            <div class="email-card-bottom">
-                                <span>{{ email.date }}</span>
-                                <span class="open-tag">Open original</span>
-                            </div>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="right-panel">
-                    <div class="synthesis-card">
-                        <div class="section-header">
-                            <h3>AI Synthesis Bar</h3>
-                            <p>Ask questions across all emails in this category.</p>
+            <div class="email-list">
+                {% for email in emails %}
+                <a href="{{ url_for('email_detail', email_id=email.id) }}" class="email-card">
+                    <div class="email-card-top">
+                        <div>
+                            <div class="sender">{{ email.sender }}</div>
+                            <div class="sender-email">{{ email.sender_email }}</div>
                         </div>
-
-                        <form method="POST" class="synthesis-form">
-                            <label for="chat_question">Prompt</label>
-                            <textarea
-                                id="chat_question"
-                                name="chat_question"
-                                placeholder="Which opportunity looks strongest and why?"
-                            >{{ chat_question }}</textarea>
-
-                            <div class="prompt-pills">
-                                <button type="button" class="prompt-btn">Which one is most urgent?</button>
-                                <button type="button" class="prompt-btn">Summarize this category</button>
-                                <button type="button" class="prompt-btn">What resource should I use first?</button>
-                            </div>
-
-                            <button type="submit" class="primary-btn">Synthesize</button>
-                        </form>
-
-                        {% if synthesis %}
-                        <div class="answer-card">
-                            <div class="answer-label">AI Response</div>
-                            <p>{{ synthesis.answer }}</p>
-
-                            {% if synthesis.citations %}
-                            <div class="citation-block">
-                                <div class="citation-title">Citations</div>
-                                <ul>
-                                    {% for email in synthesis.citations %}
-                                    <li>
-                                        <a href="{{ url_for('email_detail', email_id=email.id) }}">
-                                            [{{ email.id }}] {{ email.sender }} — {{ email.subject }}
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            {% endif %}
+                        <div class="priority-chip priority-{{ 'high' if email.priority >= 7 else 'mid' if email.priority >= 4 else 'low' }}">
+                            Priority {{ email.priority }}
                         </div>
-                        {% else %}
-                        <div class="placeholder-card">
-                            Ask the AI to compare urgency, summarize the category, or identify the strongest opportunity. Original emails will be cited below the answer.
-                        </div>
-                        {% endif %}
                     </div>
-                </div>
-            </section>
+                    <div class="subject">{{ email.subject }}</div>
+                    <div class="summary">{{ email.summary }}</div>
+                    <div class="email-card-bottom">
+                        <span>{{ email.date }}</span>
+                        <span class="open-tag">Open original →</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
         </main>
     </div>
+
+    <!-- ── FLOATING CHAT ──────────────────────────────────── -->
+    <div class="chat-wrap" id="chatWrap">
+
+        <!-- Response panel -->
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-panel-header">
+                <span class="chat-panel-label">✦ AI Response</span>
+                <button class="chat-panel-close" id="chatClose">✕</button>
+            </div>
+            <div class="chat-panel-body">
+                <div class="chat-loading" id="chatLoading">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="chat-answer" id="chatAnswer"></div>
+                <div class="chat-citations" id="chatCitations"></div>
+            </div>
+        </div>
+
+        <!-- Search bar -->
+        <div class="chat-bar">
+            <span class="chat-bar-icon">✦</span>
+            <input
+                type="text"
+                id="chatInput"
+                class="chat-bar-input"
+                placeholder="Ask anything about your {{ category_name }} emails…"
+                autocomplete="off"
+            />
+            <button class="chat-bar-send" id="chatSend">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 3L13 8L8 13M3 8H13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hidden POST form -->
+    <form id="synthForm" method="POST" style="display:none">
+        <input type="hidden" name="chat_question" id="synthQuestion">
+    </form>
+
+    {% if synthesis %}
+    <script>
+    window.__synthesis = {
+        answer: {{ synthesis.answer | tojson }},
+        citations: [{% for e in synthesis.citations %}{ id: {{ e.id | tojson }}, sender: {{ e.sender | tojson }}, subject: {{ e.subject | tojson }} },{% endfor %}],
+        question: {{ chat_question | tojson }}
+    };
+    </script>
+    {% endif %}
+
 </body>
 </html>

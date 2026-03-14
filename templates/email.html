@@ -9,14 +9,35 @@
 <body>
     <div class="shell">
         <aside class="sidebar">
-            <a class="back-link" href="{{ url_for('category_page', category_name=email.category) }}">← Back to {{ email.category }}</a>
+            <a class="back-link" href="{{ url_for('category_page', category_name=email.category) }}">← {{ email.category }}</a>
 
             <div class="brand-card small-brand">
                 <div class="brand-icon">📩</div>
                 <div>
-                    <h1>Original Email</h1>
-                    <p>Read the full message, sender, and timestamp.</p>
+                    <h1>Email Detail</h1>
+                    <p>Open the highest-value messages faster.</p>
                 </div>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>Priority</h3>
+                <p style="font-size: 32px; font-family: 'Syne', sans-serif; font-weight: 800; color: {% if email.priority >= 7 %}#e63f6b{% elif email.priority >= 4 %}#f5c542{% else %}#4a8cff{% endif %}; margin-top: 4px;">
+                    {{ email.priority }} / 10
+                </p>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>Category</h3>
+                <p>
+                    {% for category, meta in category_meta_all.items() %}
+                        {% if category == email.category %}{{ meta.icon }} {{ category }}{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>Received</h3>
+                <p>{{ email.date }}</p>
             </div>
         </aside>
 
@@ -24,7 +45,7 @@
             <section class="hero-card compact-hero">
                 <span class="eyebrow">Original Message</span>
                 <h2>{{ email.subject }}</h2>
-                <p>Category: {{ email.category }} · Priority: {{ email.priority }}</p>
+                <p>From {{ email.sender }} &middot; {{ email.sender_email }}</p>
             </section>
 
             <section class="full-email-card">
@@ -42,8 +63,8 @@
 
                 <div class="full-email-tags">
                     <span class="tag">{{ email.category }}</span>
+                    <span class="tag">Priority {{ email.priority }}</span>
                     <span class="tag">Original Email</span>
-                    <span class="tag">Student Inbox</span>
                 </div>
             </section>
         </main>

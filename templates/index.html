@@ -3,41 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InboxIQ | Gmail Organizer Tool</title>
+    <title>InboxIQ | AI Gmail Organizer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="shell">
         <aside class="sidebar">
             <div class="brand-card">
-                <div class="brand-icon">✉️</div>
+                <div class="brand-icon">✉</div>
                 <div>
                     <h1>InboxIQ</h1>
-                    <p>Smart Gmail Organizer for Students</p>
+                    <p>AI Gmail Organizer</p>
                 </div>
             </div>
 
-            <div class="sidebar-block">
-                <h3>Problem</h3>
-                <p>
-                    University students miss internships, research positions, campus support, and jobs because the right resource gets buried in crowded inboxes.
-                </p>
-            </div>
+            <p class="smart-labels-title">Smart Labels</p>
+            <nav class="label-list">
+                {% for card in category_cards %}
+                <a href="{{ url_for('category_page', category_name=card.name) }}" class="label-item">
+                    <span class="label-left">
+                        <span class="label-icon">{{ card.icon }}</span>
+                        <span class="label-name">{{ card.name }}</span>
+                    </span>
+                    <span class="label-count">{{ card.count }}</span>
+                </a>
+                {% endfor %}
+            </nav>
 
             <div class="sidebar-block">
-                <h3>Solution</h3>
+                <h3>About</h3>
                 <p>
-                    InboxIQ uses AI-style categorization to organize emails into actionable labels and lets students synthesize each category with cited email evidence.
+                    University students miss internships, research, and campus resources because important emails get buried. InboxIQ surfaces what matters most.
                 </p>
             </div>
         </aside>
 
         <main class="main">
             <section class="hero-card">
-                <span class="eyebrow">Hackathon Project</span>
-                <h2>Find the right resource before it gets lost in your inbox</h2>
+                <span class="eyebrow">Hackathon MVP</span>
+                <h2>Organize your inbox instantly</h2>
                 <p>
-                    This tool categorizes student emails by purpose, highlights useful opportunities and support services, and makes inbox navigation faster and smarter.
+                    AI groups similar emails into useful labels like Career, Academic, Finance, and Opportunities — then helps you decide what deserves attention first.
                 </p>
 
                 <div class="stats">
@@ -56,10 +62,10 @@
                 </div>
             </section>
 
-            <section class="section-header">
+            <div class="section-header">
                 <h3>Dashboard</h3>
-                <p>Click a category to view emails, summaries, and an AI synthesis bar with citations.</p>
-            </section>
+                <p>Click a category to view emails, AI summaries, and a synthesis bar with citations.</p>
+            </div>
 
             <section class="card-grid">
                 {% for card in category_cards %}
@@ -74,15 +80,13 @@
 
                     {% if card.top_email %}
                     <div class="card-highlight">
-                        <div class="highlight-label">Top email</div>
+                        <div class="highlight-label">Top pick</div>
                         <div class="highlight-subject">{{ card.top_email.subject }}</div>
                         <div class="highlight-sender">{{ card.top_email.sender }}</div>
                     </div>
                     {% endif %}
 
-                    <div class="preview-box">
-                        {{ card.preview }}
-                    </div>
+                    <div class="preview-box">{{ card.preview }}</div>
                 </a>
                 {% endfor %}
             </section>

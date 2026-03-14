@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InboxIQ — AI Gmail Organizer for Students</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+</head>
+<body class="landing-body">
+
+    <!-- NAV -->
+    <nav class="landing-nav">
+        <div class="nav-brand">
+            <div class="nav-logo">✉</div>
+            <span class="nav-name">InboxIQ</span>
+        </div>
+        <div class="nav-links">
+            <a href="#how">How it works</a>
+            <a href="#features">Features</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="badge-pill">AI-Powered</span>
+            <span class="badge-text">Built for university students →</span>
+        </div>
+
+        <h1 class="hero-title">
+            Never miss an<br>
+            <span class="hero-gradient">important email</span><br>
+            again.
+        </h1>
+
+        <p class="hero-sub">
+            InboxIQ connects to your Gmail, uses AI to sort every email into smart categories, and lets you ask questions across your entire inbox — with citations.
+        </p>
+
+        <div class="hero-cta">
+            <a href="{{ url_for('login') }}" class="cta-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+                Connect Gmail
+            </a>
+            <a href="#how" class="secondary-btn">See how it works</a>
+        </div>
+
+        <div class="hero-stats">
+            <div class="h-stat">
+                <span class="h-stat-n">4</span>
+                <span class="h-stat-l">Smart labels</span>
+            </div>
+            <div class="h-stat-div"></div>
+            <div class="h-stat">
+                <span class="h-stat-n">AI</span>
+                <span class="h-stat-l">Categorization</span>
+            </div>
+            <div class="h-stat-div"></div>
+            <div class="h-stat">
+                <span class="h-stat-n">GPT</span>
+                <span class="h-stat-l">Chat synthesis</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how">
+        <div class="section-label">How it works</div>
+        <h2 class="section-title">Three steps to inbox clarity</h2>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <div class="step-icon">🔐</div>
+                <h3>Connect Gmail</h3>
+                <p>Sign in with your Google account. InboxIQ reads your emails securely using the official Gmail API — read-only access, no sending.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <div class="step-icon">🤖</div>
+                <h3>AI organizes everything</h3>
+                <p>GPT-4o-mini reads each email and sorts it into Career, Resources, Opportunities, or Job categories — with a priority score and summary.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <div class="step-icon">💬</div>
+                <h3>Chat with your inbox</h3>
+                <p>Ask questions like "Which deadline is most urgent?" or "Summarize my career emails." AI answers with citations from your actual emails.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Everything students need</h2>
+
+        <div class="features-grid">
+            <div class="feature-card wide">
+                <div class="feature-icon">📂</div>
+                <h3>Smart categorization</h3>
+                <p>AI groups emails into Career, Resources, Opportunities, and Job — not by keyword, but by understanding the actual content and intent of each message.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Priority scoring</h3>
+                <p>Every email gets a priority score from 1–10 based on urgency, deadlines, and opportunity value.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3>AI summaries</h3>
+                <p>Each email gets a one-sentence summary so you can scan a full category in seconds.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Cited answers</h3>
+                <p>Every AI response links back to the exact emails it used — no hallucinations, full transparency.</p>
+            </div>
+            <div class="feature-card wide">
+                <div class="feature-icon">🔒</div>
+                <h3>Read-only Gmail access</h3>
+                <p>InboxIQ never sends emails, never modifies your inbox. It uses Google's official OAuth with read-only Gmail scope. Your data stays yours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <h2>Stop missing what matters.</h2>
+        <p>Connect your Gmail and let AI do the sorting.</p>
+        <a href="{{ url_for('login') }}" class="cta-btn large">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Connect Gmail — it's free
+        </a>
+    </section>
+
+    <footer class="landing-footer">
+        <span>© 2026 InboxIQ · Hackathon Project · Read-only Gmail access</span>
+    </footer>
+
+</body>
+</html>
