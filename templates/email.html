@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ email.subject }} | InboxIQ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <a class="back-link" href="{{ url_for('category_page', category_name=email.category) }}">← Back to {{ email.category }}</a>
+
+            <div class="brand-card small-brand">
+                <div class="brand-icon">📩</div>
+                <div>
+                    <h1>Original Email</h1>
+                    <p>Read the full message, sender, and timestamp.</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <section class="hero-card compact-hero">
+                <span class="eyebrow">Original Message</span>
+                <h2>{{ email.subject }}</h2>
+                <p>Category: {{ email.category }} · Priority: {{ email.priority }}</p>
+            </section>
+
+            <section class="full-email-card">
+                <div class="full-email-header">
+                    <div>
+                        <div class="full-sender">{{ email.sender }}</div>
+                        <div class="full-email-meta">{{ email.sender_email }}</div>
+                    </div>
+                    <div class="full-email-date">{{ email.date }}</div>
+                </div>
+
+                <div class="full-email-body">
+                    {{ email.body }}
+                </div>
+
+                <div class="full-email-tags">
+                    <span class="tag">{{ email.category }}</span>
+                    <span class="tag">Original Email</span>
+                    <span class="tag">Student Inbox</span>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

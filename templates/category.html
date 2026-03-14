@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category_name }} | InboxIQ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+    <div class="shell">
+        <aside class="sidebar">
+            <a class="back-link" href="{{ url_for('dashboard') }}">← Back to dashboard</a>
+
+            <div class="brand-card small-brand">
+                <div class="brand-icon">{{ category_meta.icon }}</div>
+                <div>
+                    <h1>{{ category_name }}</h1>
+                    <p>{{ category_meta.description }}</p>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>Other Labels</h3>
+                <div class="mini-nav">
+                    {% for category, meta in category_meta_all.items() %}
+                    <a href="{{ url_for('category_page', category_name=category) }}" class="mini-nav-link {% if category == category_name %}active{% endif %}">
+                        <span>{{ meta.icon }}</span>
+                        <span>{{ category }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <section class="hero-card compact-hero">
+                <span class="eyebrow">Category View</span>
+                <h2>{{ category_name }} Emails</h2>
+                <p>
+                    Click an email to open the original message. Use the synthesis bar below to ask questions about this entire category.
+                </p>
+            </section>
+
+            <section class="two-column-layout">
+                <div class="left-panel">
+                    <div class="section-header">
+                        <h3>Emails in {{ category_name }}</h3>
+                        <p>Sender, subject, and AI-generated summary.</p>
+                    </div>
+
+                    <div class="email-list">
+                        {% for email in emails %}
+                        <a href="{{ url_for('email_detail', email_id=email.id) }}" class="email-card">
+                            <div class="email-card-top">
+                                <div>
+                                    <div class="sender">{{ email.sender }}</div>
+                                    <div class="sender-email">{{ email.sender_email }}</div>
+                                </div>
+                                <div class="priority-chip priority-{{ 'high' if email.priority >= 7 else 'mid' if email.priority >= 4 else 'low' }}">
+                                    Priority {{ email.priority }}
+                                </div>
+                            </div>
+
+                            <div class="subject">{{ email.subject }}</div>
+                            <div class="summary">{{ email.summary }}</div>
+
+                            <div class="email-card-bottom">
+                                <span>{{ email.date }}</span>
+                                <span class="open-tag">Open original</span>
+                            </div>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="synthesis-card">
+                        <div class="section-header">
+                            <h3>AI Synthesis Bar</h3>
+                            <p>Ask questions across all emails in this category.</p>
+                        </div>
+
+                        <form method="POST" class="synthesis-form">
+                            <label for="chat_question">Prompt</label>
+                            <textarea
+                                id="chat_question"
+                                name="chat_question"
+                                placeholder="Which opportunity looks strongest and why?"
+                            >{{ chat_question }}</textarea>
+
+                            <div class="prompt-pills">
+                                <button type="button" class="prompt-btn">Which one is most urgent?</button>
+                                <button type="button" class="prompt-btn">Summarize this category</button>
+                                <button type="button" class="prompt-btn">What resource should I use first?</button>
+                            </div>
+
+                            <button type="submit" class="primary-btn">Synthesize</button>
+                        </form>
+
+                        {% if synthesis %}
+                        <div class="answer-card">
+                            <div class="answer-label">AI Response</div>
+                            <p>{{ synthesis.answer }}</p>
+
+                            {% if synthesis.citations %}
+                            <div class="citation-block">
+                                <div class="citation-title">Citations</div>
+                                <ul>
+                                    {% for email in synthesis.citations %}
+                                    <li>
+                                        <a href="{{ url_for('email_detail', email_id=email.id) }}">
+                                            [{{ email.id }}] {{ email.sender }} — {{ email.subject }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="placeholder-card">
+                            Ask the AI to compare urgency, summarize the category, or identify the strongest opportunity. Original emails will be cited below the answer.
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".prompt-btn");
+    const textarea = document.getElementById("chat_question");
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", function () {
+            if (textarea) {
+                textarea.value = button.textContent.trim();
+                textarea.focus();
+            }
+        });
+    });
+});

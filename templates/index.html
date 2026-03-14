@@ -3,127 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Study Helper</title>
+    <title>InboxIQ | Gmail Organizer Tool</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script>
-        function fillTopic(topic) {
-            document.getElementById("topic").value = topic;
-        }
-    </script>
 </head>
 <body>
-    <div class="page-layout">
+    <div class="shell">
         <aside class="sidebar">
-            <div class="sidebar-card">
-                <h2>Study Music</h2>
-                <p class="sidebar-text">Play something while you study.</p>
-
-<div class="spotify-player">
-    <iframe
-        style="border-radius:12px"
-        src="https://open.spotify.com/embed/album/161Te6W2Bylj3YmpI4Svit"
-        width="100%"
-        height="352"
-        frameborder="0"
-        allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-    </iframe>
-</div>
+            <div class="brand-card">
+                <div class="brand-icon">✉️</div>
+                <div>
+                    <h1>InboxIQ</h1>
+                    <p>Smart Gmail Organizer for Students</p>
+                </div>
             </div>
 
-            <div class="sidebar-card">
-                <h2>Quick Picks</h2>
-                <p class="sidebar-text">Tap a topic to fill the box.</p>
-                <div class="topic-buttons sidebar-topics">
-                    <button type="button" onclick="fillTopic('derivatives')">Derivatives</button>
-                    <button type="button" onclick="fillTopic('fractions')">Fractions</button>
-                    <button type="button" onclick="fillTopic('loops')">Loops</button>
-                    <button type="button" onclick="fillTopic('probability')">Probability</button>
-                </div>
+            <div class="sidebar-block">
+                <h3>Problem</h3>
+                <p>
+                    University students miss internships, research positions, campus support, and jobs because the right resource gets buried in crowded inboxes.
+                </p>
+            </div>
+
+            <div class="sidebar-block">
+                <h3>Solution</h3>
+                <p>
+                    InboxIQ uses AI-style categorization to organize emails into actionable labels and lets students synthesize each category with cited email evidence.
+                </p>
             </div>
         </aside>
 
-        <main class="main-content">
-            <div class="container">
-                <div class="hero">
-                    <h1>AI Study Helper</h1>
-                    <p class="subtitle">
-                        Tell us what you are struggling with and get a personalized study suggestion,
-                        learning style, and practice question.
-                    </p>
+        <main class="main">
+            <section class="hero-card">
+                <span class="eyebrow">Hackathon Project</span>
+                <h2>Find the right resource before it gets lost in your inbox</h2>
+                <p>
+                    This tool categorizes student emails by purpose, highlights useful opportunities and support services, and makes inbox navigation faster and smarter.
+                </p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">{{ total_emails }}</div>
+                        <div class="stat-label">Emails scanned</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Smart labels</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">{{ top_priority }}</div>
+                        <div class="stat-label">Top priority score</div>
+                    </div>
                 </div>
+            </section>
 
-                <form method="POST" action="/help" class="study-form">
-                    <label for="topic" class="main-label">What are you struggling with?</label>
-                    <input
-                        type="text"
-                        id="topic"
-                        name="topic"
-                        placeholder="Example: derivatives"
-                        required
-                    >
+            <section class="section-header">
+                <h3>Dashboard</h3>
+                <p>Click a category to view emails, summaries, and an AI synthesis bar with citations.</p>
+            </section>
 
-                    <div class="selectors">
-                        <div class="field-group">
-                            <label for="style">Learning Style</label>
-                            <select id="style" name="style">
-                                <option value="steps">Step by step</option>
-                                <option value="visual">Visual explanation</option>
-                                <option value="practice">Practice problems</option>
-                            </select>
-                        </div>
-
-                        <div class="field-group">
-                            <label for="difficulty">Difficulty</label>
-                            <select id="difficulty" name="difficulty">
-                                <option value="beginner">Beginner</option>
-                                <option value="intermediate">Intermediate</option>
-                                <option value="advanced">Advanced</option>
-                            </select>
-                        </div>
+            <section class="card-grid">
+                {% for card in category_cards %}
+                <a href="{{ url_for('category_page', category_name=card.name) }}" class="dashboard-card">
+                    <div class="card-top">
+                        <div class="icon-wrap">{{ card.icon }}</div>
+                        <div class="count-pill">{{ card.count }} emails</div>
                     </div>
 
-                    <button type="submit" class="main-button">Get Help</button>
-                </form>
+                    <h4>{{ card.name }}</h4>
+                    <p class="card-description">{{ card.description }}</p>
 
-                {% if result %}
-                <div class="answer-box">
-                    <h2>Suggestion</h2>
-
-                    {% if result.topic %}
-                        <div class="result-grid">
-                            <div class="result-chip"><strong>Topic:</strong> {{ result.topic }}</div>
-                            <div class="result-chip"><strong>Style:</strong> {{ result.style_label }}</div>
-                            <div class="result-chip"><strong>Level:</strong> {{ result.difficulty_label }}</div>
-                        </div>
-                    {% endif %}
-
-                    <div class="result-section">
-                        <h3>Explanation</h3>
-                        <p>{{ result.explanation }}</p>
-                    </div>
-
-                    {% if result.practice_question %}
-                    <div class="result-section practice-section">
-                        <h3>Practice Question</h3>
-                        <p>{{ result.practice_question }}</p>
+                    {% if card.top_email %}
+                    <div class="card-highlight">
+                        <div class="highlight-label">Top email</div>
+                        <div class="highlight-subject">{{ card.top_email.subject }}</div>
+                        <div class="highlight-sender">{{ card.top_email.sender }}</div>
                     </div>
                     {% endif %}
-                </div>
-                {% endif %}
 
-                {% if history %}
-                <div class="history-box">
-                    <h2>Topics You Struggled With Today</h2>
-                    <ul>
-                        {% for item in history %}
-                        <li>{{ item }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
-            </div>
+                    <div class="preview-box">
+                        {{ card.preview }}
+                    </div>
+                </a>
+                {% endfor %}
+            </section>
         </main>
     </div>
 </body>
