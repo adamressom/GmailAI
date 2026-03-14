@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Helper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function fillTopic(topic) {
+            document.getElementById("topic").value = topic;
+        }
+    </script>
+</head>
+<body>
+    <div class="page-layout">
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h2>Study Music</h2>
+                <p class="sidebar-text">Play something while you study.</p>
+
+<div class="spotify-player">
+    <iframe
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/album/161Te6W2Bylj3YmpI4Svit"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+    </iframe>
+</div>
+            </div>
+
+            <div class="sidebar-card">
+                <h2>Quick Picks</h2>
+                <p class="sidebar-text">Tap a topic to fill the box.</p>
+                <div class="topic-buttons sidebar-topics">
+                    <button type="button" onclick="fillTopic('derivatives')">Derivatives</button>
+                    <button type="button" onclick="fillTopic('fractions')">Fractions</button>
+                    <button type="button" onclick="fillTopic('loops')">Loops</button>
+                    <button type="button" onclick="fillTopic('probability')">Probability</button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="hero">
+                    <h1>AI Study Helper</h1>
+                    <p class="subtitle">
+                        Tell us what you are struggling with and get a personalized study suggestion,
+                        learning style, and practice question.
+                    </p>
+                </div>
+
+                <form method="POST" action="/help" class="study-form">
+                    <label for="topic" class="main-label">What are you struggling with?</label>
+                    <input
+                        type="text"
+                        id="topic"
+                        name="topic"
+                        placeholder="Example: derivatives"
+                        required
+                    >
+
+                    <div class="selectors">
+                        <div class="field-group">
+                            <label for="style">Learning Style</label>
+                            <select id="style" name="style">
+                                <option value="steps">Step by step</option>
+                                <option value="visual">Visual explanation</option>
+                                <option value="practice">Practice problems</option>
+                            </select>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="difficulty">Difficulty</label>
+                            <select id="difficulty" name="difficulty">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="main-button">Get Help</button>
+                </form>
+
+                {% if result %}
+                <div class="answer-box">
+                    <h2>Suggestion</h2>
+
+                    {% if result.topic %}
+                        <div class="result-grid">
+                            <div class="result-chip"><strong>Topic:</strong> {{ result.topic }}</div>
+                            <div class="result-chip"><strong>Style:</strong> {{ result.style_label }}</div>
+                            <div class="result-chip"><strong>Level:</strong> {{ result.difficulty_label }}</div>
+                        </div>
+                    {% endif %}
+
+                    <div class="result-section">
+                        <h3>Explanation</h3>
+                        <p>{{ result.explanation }}</p>
+                    </div>
+
+                    {% if result.practice_question %}
+                    <div class="result-section practice-section">
+                        <h3>Practice Question</h3>
+                        <p>{{ result.practice_question }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                {% if history %}
+                <div class="history-box">
+                    <h2>Topics You Struggled With Today</h2>
+                    <ul>
+                        {% for item in history %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>
