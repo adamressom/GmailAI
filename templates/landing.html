@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InboxIQ — AI Gmail Organizer for Students</title>
+    <title>GmailAI — AI Gmail Organizer for Students</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
 </head>
@@ -13,7 +13,7 @@
     <nav class="landing-nav">
         <div class="nav-brand">
             <div class="nav-logo">✉</div>
-            <span class="nav-name">InboxIQ</span>
+            <span class="nav-name">GmailAI</span>
         </div>
         <div class="nav-links">
             <a href="#how">How it works</a>
@@ -35,7 +35,7 @@
         </h1>
 
         <p class="hero-sub">
-            InboxIQ connects to your Gmail, uses AI to sort every email into smart categories, and lets you ask questions across your entire inbox — with citations.
+            GmailAI connects to your Gmail, uses AI to sort every email into smart categories, and lets you ask questions across your entire inbox — with citations.
         </p>
 
         <div class="hero-cta">
@@ -68,6 +68,33 @@
             </div>
         </div>
     </section>
+    
+    <Br>
+
+    <p style="text-align:center; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#3d4a63; margin-bottom:16px; position:relative; z-index:1;">Used by students at</p>
+
+    <!-- UNIVERSITY TICKER -->
+<div class="ticker-wrap uni-ticker-wrap">
+    <div class="ticker-track uni-ticker-track">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/uva.png') }}" alt="UVA">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/michigan.png') }}" alt="Michigan">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/cornell.png') }}" alt="Cornell">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/harvard.png') }}" alt="Harvard">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/oxford.png') }}" alt="Oxford">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/yale.png') }}" alt="Yale">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/mit.png') }}" alt="MIT">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/stanford.png') }}" alt="Stanford">
+
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/uva.png') }}" alt="UVA">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/michigan.png') }}" alt="Michigan">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/cornell.png') }}" alt="Cornell">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/harvard.png') }}" alt="Harvard">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/oxford.png') }}" alt="Oxford">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/yale.png') }}" alt="Yale">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/mit.png') }}" alt="MIT">
+        <img class="uni-logo" src="{{ url_for('static', filename='uni-logos/stanford.png') }}" alt="Stanford">
+    </div>
+</div>
 
     <!-- HOW IT WORKS -->
     <section class="how-section" id="how">
@@ -79,7 +106,7 @@
                 <div class="step-num">01</div>
                 <div class="step-icon">🔐</div>
                 <h3>Connect Gmail</h3>
-                <p>Sign in with your Google account. InboxIQ reads your emails securely using the official Gmail API — read-only access, no sending.</p>
+                <p>Sign in with your Google account. GmailAI reads your emails securely using the official Gmail API — read-only access, no sending.</p>
             </div>
             <div class="step-card">
                 <div class="step-num">02</div>
@@ -125,10 +152,33 @@
             <div class="feature-card wide">
                 <div class="feature-icon">🔒</div>
                 <h3>Read-only Gmail access</h3>
-                <p>InboxIQ never sends emails, never modifies your inbox. It uses Google's official OAuth with read-only Gmail scope. Your data stays yours.</p>
+                <p>GmailAI never sends emails, never modifies your inbox. It uses Google's official OAuth with read-only Gmail scope. Your data stays yours.</p>
             </div>
         </div>
     </section>
+
+    <div class="ticker-wrap">
+        <div class="ticker-track">
+            <span>Career Emails</span>
+            <span>Research Opportunities</span>
+            <span>Campus Resources</span>
+            <span>Internship Alerts</span>
+            <span>Priority Scoring</span>
+            <span>AI Summaries</span>
+            <span>Job Applications</span>
+            <span>Cited Answers</span>
+        <!-- duplicate for seamless loop -->
+            <span>Career Emails</span>
+            <span>Research Opportunities</span>
+            <span>Campus Resources</span>
+            <span>Internship Alerts</span>
+            <span>Priority Scoring</span>
+            <span>AI Summaries</span>
+            <span>Job Applications</span>
+            <span>Cited Answers</span>
+        </div>
+    </div>
+
 
     <!-- FINAL CTA -->
     <section class="final-cta">
@@ -145,9 +195,67 @@
         </a>
     </section>
 
-    <footer class="landing-footer">
-        <span>© 2026 InboxIQ · Hackathon Project · Read-only Gmail access</span>
-    </footer>
+<footer class="landing-footer-full">
+    <div class="footer-grid">
+        <div class="footer-brand-col">
+            <div class="footer-brand">
+                <span class="nav-name">GmailAI</span>
+            </div>
+            <p class="footer-tagline">AI-powered inbox organizer for university students.</p>
+        </div>
 
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <a href="#">Home</a>
+            <a href="#how">How it Works</a>
+            <a href="#features">Features</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#">Documentation</a>
+            <a href="#">FAQ</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/in/adam-ressom/" target="_blank" class="footer-social-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/adamressom/" target="_blank" class="footer-social-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <span>© 2026 GmailAI · Read-only Gmail access</span>
+        <div class="footer-bottom-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- SOCIAL LINKS
+    <div class="social-corner">
+        <a href="https://www.linkedin.com/in/adam-ressom/" target="_blank" class="social-link" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+        </a>
+        <a href="https://www.instagram.com/adamressom/" target="_blank" class="social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+        </a>
+    </div> -->
 </body>
 </html>
