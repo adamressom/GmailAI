@@ -1,70 +1,137 @@
-My bad, I get exactly what you mean now. You want it raw, loose, and completely un-nested without the markdown code-block wrapper enclosing the whole thing so it mimics a direct copy-paste dump.
+# GmailAI
 
-Here is the entire text exactly as you formatted it:
+📥 **AI-powered Gmail organizer for email summarization and priority scoring**
 
-GmailAI
-📥 AI-powered Gmail organizer for email summarization and priority scoring
+GmailAI is an intelligent inbox assistant that connects to the Gmail API and uses Google's Gemini API to summarize incoming emails, evaluate urgency, and assign priority scores. It also includes a clean dark-mode landing page designed to make email triage faster and easier.
 
-GmailAI is an intelligent inbox assistant that connects to the Gmail API and leverages Google's Gemini API to automatically summarize incoming emails, evaluate their urgency, and score their priority. It features a modern, clean dark-mode landing page to streamline your daily email triage.
+---
 
-Tech Stack
-Python & Flask — Lightweight backend and server architecture (app.py)
+## Tech Stack
 
-Gemini API — Advanced LLM processing for automated email summarization and priority classification
+- **Python & Flask**: Lightweight backend and server architecture
+- **Gemini API**: AI-powered email summarization and priority classification
+- **Gmail API**: Secure email fetching and inbox integration
+- **HTML/CSS/JavaScript**: Responsive dark-mode user interface
 
-Gmail API — Secure email fetching and inbox integration
+---
 
-HTML/CSS/JS — Responsive, minimalist dark-mode user interface
+## Features
 
-Features
-Smart Summarization — Generates concise, actionable TL;DRs for long email threads.
+- **Smart Summarization**  
+  Generates concise and actionable TL;DR summaries for long emails and threads.
 
-Urgency Scoring — Evaluates message content to rank urgency and assign clear priority levels.
+- **Urgency Scoring**  
+  Evaluates email content to determine urgency and assign clear priority levels.
 
-Dynamic Dashboard — A unified, clean interface to review organized emails without inbox clutter.
+- **Dynamic Dashboard**  
+  Provides a clean interface to review organized emails without inbox clutter.
 
-Secure Integration — Connects directly to your account using official Google OAuth protocols.
+- **Secure Integration**  
+  Connects to Gmail using official Google OAuth authentication.
 
-Getting Started
-Prerequisites
-Python 3.10+
+---
 
-A Google Cloud Project with the Gmail API enabled
+## Getting Started
 
-A Google AI Studio Gemini API Key
+### Prerequisites
 
-Installation
-Clone the repository:
+Before running this project, make sure you have:
 
-Bash
-   git clone https://github.com/adamressom/GmailAI.git
-   cd GmailAI
-Install the required dependencies:
+- Python 3.10+
+- A Google Cloud Project with the Gmail API enabled
+- A Google AI Studio Gemini API key
 
-Bash
-   pip install -r requirements.txt
-Set up your Google OAuth credentials:
+---
 
-Download your credentials.json file from the Google Cloud Console.
+## Installation
 
-Place credentials.json in the root directory of this project.
+### 1. Clone the repository
 
-Environment Variables
-Create a .env file in the project root and add your Gemini API key:
+```bash
+git clone https://github.com/adamressom/GmailAI.git
+cd GmailAI
+```
 
-Code snippet
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Set up Google OAuth credentials
+
+Download your `credentials.json` file from the Google Cloud Console.
+
+Place the file in the root directory of this project:
+
+```plaintext
+GmailAI/
+├── credentials.json
+├── app.py
+├── requirements.txt
+├── static/
+└── templates/
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root and add the following:
+
+```env
 GEMINI_API_KEY=your_gemini_api_key_here
 FLASK_SECRET_KEY=your_chosen_random_secret_key
-Run Locally
+```
+
+---
+
+## Run Locally
+
 Start the Flask development server:
 
-Bash
+```bash
 python app.py
-Open http://localhost:5000 in your browser, complete the Google OAuth verification, and view your intelligent inbox dashboard.
+```
 
-Project Structure
-Plaintext
-static/          # UI assets (CSS styling, icons)
-templates/       # Flask HTML templates (dark landing page)
-app.py           # Main application server, Gmail OAuth, and Gemini integration
-requirements.txt # Python dependencies
+Then open the app in your browser:
+
+```plaintext
+http://localhost:5000
+```
+
+Complete the Google OAuth verification and view your intelligent inbox dashboard.
+
+---
+
+## Project Structure
+
+```plaintext
+GmailAI/
+├── static/              # UI assets, CSS styling, icons
+├── templates/           # Flask HTML templates
+├── app.py               # Main Flask app, Gmail OAuth, and Gemini integration
+├── requirements.txt     # Python dependencies
+├── credentials.json     # Google OAuth credentials, not included in repo
+└── README.md            # Project documentation
+```
+
+---
+
+## Security Note
+
+Do not commit your `.env` file or `credentials.json` file to GitHub. These files contain private API keys and authentication credentials.
+
+Make sure they are listed in your `.gitignore` file:
+
+```gitignore
+.env
+credentials.json
+token.json
+```
+
+---
+
+## Author
+
+Created by [Adam Ressom](https://github.com/adamressom)
